@@ -149,10 +149,10 @@ export default function Header() {
       {menuOpen && (
         <div className="absolute top-14 left-0 w-full bg-[rgba(136,42,42,0.9)] backdrop-blur-md shadow-lg py-4 flex flex-col items-center space-y-4 text-white z-10">
           <Link href="/abc-para-la-paz" onClick={() => setMenuOpen(false)}>ABC para la paz</Link>
-          <Link href="/dolor" onClick={() => setMenuOpen(false)}>La paz como un derecho</Link>
-          <Link href="/dolor" onClick={() => setMenuOpen(false)}>Grupos armados</Link>
+          <Link href="/paz-como-derecho" onClick={() => setMenuOpen(false)}>La paz como un derecho</Link>
+          <Link href="/grupos-armados" onClick={() => setMenuOpen(false)}>Grupos armados</Link>
           <Link href="/semaforo" onClick={() => setMenuOpen(false)}>Semáforo</Link>
-          <Link href="/sobre-nosotros" onClick={() => setMenuOpen(false)}>Nosotros</Link>
+          <Link href="/ThreeDView" onClick={() => setMenuOpen(false)}>Nosotros</Link>
           <Link href="/contacto" onClick={() => setMenuOpen(false)}>Contacto</Link>
         </div>
       )}
