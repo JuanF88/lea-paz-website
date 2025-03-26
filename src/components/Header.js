@@ -42,7 +42,7 @@ export default function Header() {
 
   const getHeaderColor = () => {
     if (scrollPercentage < 20) {
-      return "rgba(145, 145, 145, 0.05)";
+      return "rgba(255, 255, 255, 0.19)";
     } else if (scrollPercentage < 60) {
       return "rgba(165, 39, 39, 0.44)";
     } else {

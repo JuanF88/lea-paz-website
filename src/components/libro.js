@@ -40,11 +40,10 @@ export default function LibroInteractivo() {
 
   return (
     <div
-      className={`${
-        isMobile
-          ? "relative w-screen h-screen flex items-center justify-center overflow-hidden bg-black"
-          : "flex justify-center items-center min-h-screen bg-black overflow-hidden"
-      } px-2`}
+      className={`${isMobile
+          ? "relative w-screen h-screen flex items-center justify-center overflow-hidden bg-transparent"
+          : "flex justify-center items-center min-h-screen bg-transparent overflow-hidden"
+        } px-2`}
     >
       <div className={`${isMobile ? "w-screen h-screen" : "w-[1100px]"} relative flex justify-center`}>
         <HTMLFlipBook
@@ -64,15 +63,18 @@ export default function LibroInteractivo() {
           showPageCorners={true}
           mobileScrollSupport={true}
           useMouseEvents={true}
-          className="shadow-lg"
+        //className="shadow-xl bg-transparent"
         >
           {pages.map((src, index) => (
             <div
               key={index}
-              className={`relative w-full h-full bg-white overflow-hidden ${
-                index === 0 ? "flex items-center justify-center" : "grid grid-cols-2"
-              }`}
+              className={`relative w-full h-full overflow-hidden ${index === 0
+                  ? "flex items-center justify-center shadow-[0_0_60px_rgba(0,0,0,1)] rounded-md"
+                  : "grid grid-cols-2"
+                }`}
+              style={{ backgroundColor: "transparent" }}
             >
+
               <div className="relative w-full h-full">
                 <Image
                   src={`/imagenes/libro/${src}`}
