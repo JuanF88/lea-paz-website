@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 import Image from "next/image";
 
@@ -18,35 +18,46 @@ const pages = [
 ];
 
 export default function LibroInteractivo() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkSize = () => setIsMobile(window.innerWidth < 768);
+    checkSize();
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
+
+  const flipbookWidth = isMobile ? window.innerWidth : 500;
+  const flipbookHeight = isMobile ? window.innerHeight : 700;
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-black px-4 overflow-hidden">
-      {/* Contenedor que ajusta el tamaño según si es la portada o el libro abierto */}
-      <div className="relative flex justify-center w-[1100px]">
+    <div className={`flex justify-center items-center ${isMobile ? "w-screen h-screen" : "min-h-screen"} bg-black px-2 overflow-hidden`}>
+      <div className={`relative flex justify-center ${isMobile ? "w-screen h-screen" : "w-[1100px]"}`}>
         <HTMLFlipBook
-          width={500} // Ancho de cada página individual
-          height={700} // Altura de la página
+          width={flipbookWidth}
+          height={flipbookHeight}
           size="fixed"
           minWidth={300}
           maxWidth={1200}
           minHeight={500}
           maxHeight={1600}
-          showCover={true} // Muestra la portada como una sola página
+          showCover={true}
           drawShadow={true}
           clickEventForward={true}
           startPage={0}
           flippingTime={1000}
           maxShadowOpacity={0.3}
           showPageCorners={false}
-          mobileScrollSupport={false}
+          mobileScrollSupport={true}
           useMouseEvents={true}
-          //style={{ boxShadow: "0 0 40px rgba(255, 255, 255, 0.65)" }}
+          className="shadow-lg"
         >
           {pages.map((src, index) => (
             <div
               key={index}
               className={`w-full h-full flex justify-center items-center bg-white ${
                 index === 0 ? "flex" : "grid grid-cols-2"
-              }`} // Ajuste visual para la portada
+              }`}
             >
               <Image
                 src={`/imagenes/libro/${src}`}

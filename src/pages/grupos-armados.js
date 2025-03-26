@@ -55,47 +55,47 @@ export default function GruposArmados() {
         </section>
 
         <section ref={sectionRef} className="min-h-screen flex items-center justify-center w-full relative z-20">
-          <div className="flex flex-wrap justify-center items-center gap-10 px-6 max-w-7xl relative z-20">
-            {groupImages.map((group, index) => (
-              <motion.div
-                key={index}
-                className={`relative transition-all duration-300 rounded-lg ${hoveredIndex !== null && hoveredIndex !== index ? "blur-sm opacity-60 z-10" : "z-30"}`}
-                variants={{ hidden: { opacity: 0, y: 100 }, visible: { opacity: 1, y: 0 } }}
-                initial="hidden"
-                animate={controls}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                whileHover={{ scale: 1.15 }}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="absolute inset-0 border-4 border-yellow-400 rounded-lg opacity-0 hover:opacity-100 transition-all duration-300 z-40"></div>
-                <Image
-                  src={group.src}
-                  alt={`Grupo ${index + 1}`}
-                  width={200}
-                  height={200}
-                  className={`transition-all duration-700 rounded-lg object-contain shadow-lg z-20 ${hoveredIndex === index ? "grayscale-0" : "grayscale"}`}
-                />
-                {hoveredIndex === index && (
-                  <motion.div
-                    className={`absolute ${index < 3 ? "right-[-320px]" : "left-[-320px]"} top-1/2 transform -translate-y-1/2 bg-gray-900 bg-opacity-95 text-white p-4 w-72 rounded-lg shadow-xl text-left z-50`}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <h4 className="text-yellow-300 font-bold mb-2">{group.nombre}</h4>
-                    <p className="text-sm text-gray-300">{group.descripcion}</p>
-
-                  </motion.div>
-
-                )}
-
-              </motion.div>
-
-            ))}
-            <p className="text-gray-500 mt-4">Haz clic en un grupo armado para más información.</p>
-
-
+          <div className="w-full max-w-7xl relative z-20">
+            <div className="flex md:flex-wrap flex-nowrap overflow-x-auto md:overflow-visible justify-start md:justify-center items-center gap-6 px-4 scrollbar-hide">
+              {groupImages.map((group, index) => (
+                <motion.div
+                  key={index}
+                  className={`flex-shrink-0 w-[160px] sm:w-[180px] md:w-[200px] relative transition-all duration-300 rounded-lg ${
+                    hoveredIndex !== null && hoveredIndex !== index ? "blur-sm opacity-60 z-10" : "z-30"
+                  }`}
+                  variants={{ hidden: { opacity: 0, y: 100 }, visible: { opacity: 1, y: 0 } }}
+                  initial="hidden"
+                  animate={controls}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.15 }}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  <div className="absolute inset-0 border-4 border-yellow-400 rounded-lg opacity-0 hover:opacity-100 transition-all duration-300 z-40"></div>
+                  <Image
+                    src={group.src}
+                    alt={`Grupo ${index + 1}`}
+                    width={200}
+                    height={200}
+                    className={`transition-all duration-700 rounded-lg object-contain shadow-lg z-20 ${
+                      hoveredIndex === index ? "grayscale-0" : "grayscale"
+                    }`}
+                  />
+                  {hoveredIndex === index && (
+                    <motion.div
+                      className={`absolute ${index < 3 ? "right-[-320px]" : "left-[-320px]"} top-1/2 transform -translate-y-1/2 bg-gray-900 bg-opacity-95 text-white p-4 w-72 rounded-lg shadow-xl text-left z-50 hidden md:block`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <h4 className="text-yellow-300 font-bold mb-2">{group.nombre}</h4>
+                      <p className="text-sm text-gray-300">{group.descripcion}</p>
+                    </motion.div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+            <p className="text-gray-500 mt-8 text-center">Haz clic en un grupo armado para más información.</p>
           </div>
         </section>
       </main>
