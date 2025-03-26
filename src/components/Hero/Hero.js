@@ -39,7 +39,7 @@ export default function Hero() {
 
   return (
     <section className={`relative flex flex-col items-center justify-center text-center min-h-screen px-0 text-white overflow-hidden ${isMobile ? "bg-black" : ""}`}>
-              <Analytics />
+      <Analytics />
 
       {/* ✅ Solo mostrar fondo animado si NO es móvil */}
       {!isMobile && (
@@ -47,9 +47,8 @@ export default function Hero() {
           {backgrounds.map((bg, index) => (
             <div
               key={index}
-              className={`absolute inset-0 w-full h-full bg-center bg-cover bg-no-repeat transition-opacity duration-[3000ms] ${
-                index === currentBackground ? "opacity-50" : "opacity-0"
-              }`}
+              className={`absolute inset-0 w-full h-full bg-center bg-cover bg-no-repeat transition-opacity duration-[3000ms] ${index === currentBackground ? "opacity-50" : "opacity-0"
+                }`}
               style={{
                 backgroundImage: `url(${bg})`,
                 backgroundAttachment: "fixed",
