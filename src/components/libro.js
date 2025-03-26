@@ -4,7 +4,7 @@ import HTMLFlipBook from "react-pageflip";
 import Image from "next/image";
 
 const pages = [
-  "portada.jpg", // Portada
+  "portada.jpg",
   "pag1.jpg",
   "pag2.jpg",
   "pag3.jpg",
@@ -27,12 +27,26 @@ export default function LibroInteractivo() {
     return () => window.removeEventListener("resize", checkSize);
   }, []);
 
+  // 🔒 Eliminar scroll del body mientras el libro está activo
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   const flipbookWidth = isMobile ? window.innerWidth : 500;
   const flipbookHeight = isMobile ? window.innerHeight : 700;
 
   return (
-    <div className={`flex justify-center items-center ${isMobile ? "w-screen h-screen" : "min-h-screen"} bg-black px-2 overflow-hidden`}>
-      <div className={`relative flex justify-center ${isMobile ? "w-screen h-screen" : "w-[1100px]"}`}>
+    <div
+      className={`${
+        isMobile
+          ? "relative w-screen h-screen flex items-center justify-center overflow-hidden bg-black"
+          : "flex justify-center items-center min-h-screen bg-black overflow-hidden"
+      } px-2`}
+    >
+      <div className={`${isMobile ? "w-screen h-screen" : "w-[1100px]"} relative flex justify-center`}>
         <HTMLFlipBook
           width={flipbookWidth}
           height={flipbookHeight}
@@ -47,7 +61,7 @@ export default function LibroInteractivo() {
           startPage={0}
           flippingTime={1000}
           maxShadowOpacity={0.3}
-          showPageCorners={false}
+          showPageCorners={true}
           mobileScrollSupport={true}
           useMouseEvents={true}
           className="shadow-lg"
@@ -55,22 +69,28 @@ export default function LibroInteractivo() {
           {pages.map((src, index) => (
             <div
               key={index}
-              className={`w-full h-full flex justify-center items-center bg-white ${
-                index === 0 ? "flex" : "grid grid-cols-2"
+              className={`relative w-full h-full bg-white overflow-hidden ${
+                index === 0 ? "flex items-center justify-center" : "grid grid-cols-2"
               }`}
             >
-              <Image
-                src={`/imagenes/libro/${src}`}
-                alt={`Página ${index}`}
-                layout="intrinsic"
-                width={500}
-                height={700}
-                className="rounded-md"
-              />
+              <div className="relative w-full h-full">
+                <Image
+                  src={`/imagenes/libro/${src}`}
+                  alt={`Página ${index}`}
+                  fill
+                  className="object-contain rounded-md"
+                />
+              </div>
             </div>
           ))}
         </HTMLFlipBook>
       </div>
+
+      {isMobile && (
+        <div className="absolute bottom-2 text-sm text-gray-400 animate-pulse z-50">
+          Desliza para pasar página →
+        </div>
+      )}
     </div>
   );
 }

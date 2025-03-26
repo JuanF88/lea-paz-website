@@ -13,7 +13,7 @@ export default function ThreeDView() {
     const titleRef = useRef(null);
     const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
     const controls = useAnimation();
-    const isTitleInView = useInView(titleRef, { once: false, amount: 0.2 });
+    const isTitleInView = useInView(titleRef, { once: false, amount: 0.3 });
 
 
     useEffect(() => {
@@ -61,5 +61,7 @@ export default function ThreeDView() {
 
             <Footer />
         </div>
+
+        
     );
 }
