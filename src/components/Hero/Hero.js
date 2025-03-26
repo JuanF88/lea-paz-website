@@ -41,8 +41,9 @@ export default function Hero() {
               backgroundImage: `url(${bg})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              backgroundAttachment: "fixed"
+              backgroundAttachment: typeof window !== "undefined" && window.innerWidth < 768 ? "scroll" : "fixed"
             }}
+            
           />
         ))}
       </div>

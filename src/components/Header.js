@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Pacifico } from "next/font/google";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 const pacifico = Pacifico({
   subsets: ["latin"],
@@ -72,7 +74,7 @@ export default function Header() {
           </Link>
         </div>
 
-        <nav className="hidden md:flex items-center absolute left-1/2 transform -translate-x-1/2 text-white font-medium z-10">
+        <nav className="hidden lg:flex items-center absolute left-1/2 transform -translate-x-1/2 text-white font-medium z-10">
           <div className="flex space-x-6">
             <div
               className="relative group"
@@ -123,9 +125,9 @@ export default function Header() {
           </div>
         </nav>
 
-        <div className="hidden md:flex space-x-4 z-10">
+        <div className="hidden lg:flex space-x-4 z-10">
           <Link
-            href="/ThreeDView"
+            href="/libroPage"
             className="px-4 py-1 border border-white rounded-full hover:bg-white hover:text-gray-900 transition"
           >
             Nosotros
@@ -139,23 +141,57 @@ export default function Header() {
         </div>
 
         <button
-          className="md:hidden text-white z-10"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
+  className="lg:hidden text-white z-10"
+  onClick={() => setMenuOpen(!menuOpen)}
+>
+
           {menuOpen ? <X size={30} /> : <Menu size={30} />}
         </button>
       </div>
+      
+      <AnimatePresence>
+  {menuOpen && (
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 w-full h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white z-40 flex flex-col justify-evenly items-center text-2xl font-semibold lg:hidden overflow-hidden"
+      >
+      {/* Botón de cierre */}
+      <button className="absolute top-6 right-6 text-white" onClick={() => setMenuOpen(false)}>
+        <X size={40} />
+      </button>
 
-      {menuOpen && (
-        <div className="absolute top-14 left-0 w-full bg-[rgba(136,42,42,0.9)] backdrop-blur-md shadow-lg py-4 flex flex-col items-center space-y-4 text-white z-10">
-          <Link href="/abc-para-la-paz" onClick={() => setMenuOpen(false)}>ABC para la paz</Link>
-          <Link href="/paz-como-derecho" onClick={() => setMenuOpen(false)}>La paz como un derecho</Link>
-          <Link href="/grupos-armados" onClick={() => setMenuOpen(false)}>Grupos armados</Link>
-          <Link href="/semaforo" onClick={() => setMenuOpen(false)}>Semáforo</Link>
-          <Link href="/ThreeDView" onClick={() => setMenuOpen(false)}>Nosotros</Link>
-          <Link href="/contacto" onClick={() => setMenuOpen(false)}>Contacto</Link>
-        </div>
-      )}
+      {/* Links con animaciones */}
+      {[
+        { href: "/abc-para-la-paz", text: "ABC para la paz" },
+        { href: "/paz-como-derecho", text: "La paz como un derecho" },
+        { href: "/grupos-armados", text: "Grupos armados" },
+        { href: "/semaforo", text: "Semáforo" },
+        { href: "/libroPage", text: "Nosotros" },
+        { href: "/contacto", text: "Contacto" },
+      ].map((link, index) => (
+        <motion.div
+          key={link.href}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ delay: index * 0.1, duration: 0.4 }}
+        >
+          <Link
+            href={link.href}
+            onClick={() => setMenuOpen(false)}
+            className="hover:text-yellow-300 transition-colors duration-300"
+          >
+            {link.text}
+          </Link>
+        </motion.div>
+      ))}
+    </motion.div>
+  )}
+</AnimatePresence>
+
     </header>
   );
 }

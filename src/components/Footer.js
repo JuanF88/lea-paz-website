@@ -13,7 +13,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-3">Lea Paz</h3>
             <ul className="space-y-1 text-xs sm:text-sm md:text-base">
-              <li><Link href="/about" className="hover:underline">Sobre Nosotros</Link></li>
+              <li><Link href="/ThreeDView" className="hover:underline">Entorno 3D</Link></li>
               <li><Link href="/careers" className="hover:underline">Carreras</Link></li>
               <li><Link href="/press" className="hover:underline">Prensa</Link></li>
             </ul>
