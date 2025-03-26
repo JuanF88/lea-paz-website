@@ -55,7 +55,7 @@ export default function ThreeDView() {
           <div
             className="absolute inset-0 bg-center bg-no-repeat"
             style={{
-              backgroundImage: "url('/imagenes/libro/fondolibro.jpg')",
+              backgroundImage: "url('/imagenes/libro/fondoLibro.jpg')",
               backgroundSize: "cover", // Usamos cover, pero lo expandimos con scale si se quiere más
               transform: "scale(1.1)", // ✅ Expansión visual sin perder proporción
             }}
