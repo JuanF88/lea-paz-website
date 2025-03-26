@@ -6,6 +6,7 @@ import HeroCarousel from "./HeroCarousel";
 import VideoModal from "./VideoModal";
 import HeroIntro from "./HeroIntro";
 import AlliesSection from "./HeroAliados";
+import { Analytics } from "@vercel/analytics/react"
 
 export default function Hero() {
   const backgrounds = [
@@ -38,7 +39,8 @@ export default function Hero() {
 
   return (
     <section className={`relative flex flex-col items-center justify-center text-center min-h-screen px-0 text-white overflow-hidden ${isMobile ? "bg-black" : ""}`}>
-      
+              <Analytics />
+
       {/* ✅ Solo mostrar fondo animado si NO es móvil */}
       {!isMobile && (
         <div className="absolute inset-0 w-full h-full min-h-screen">
